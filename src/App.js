@@ -1,6 +1,7 @@
 import React from 'react';
 import EventList from './EventList'
 import CitySearch from './CitySearch'
+import NumberOfEvents from './NumberOfEvents';
 import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       <CitySearch />
       <EventList />
+      <NumberOfEvents />
     </div>
   );
 }
