@@ -13,10 +13,12 @@ class Event extends Component {
 
   render() {
 
-    const date = this.state.details.local_date;
-    const name = this.state.details.name;
-    const groupName = this.state.details ? this.state.details.group.name : '';
-    const rsvp = this.state.details.yes_rsvp_count;
+    const { event } = this.props;
+
+    const date = event.local_date;
+    const name = event.name;
+    const groupName = event && event.group ? event.group.name : '';
+    const rsvp = event.yes_rsvp_count;
 
     return(
       <div className="event">
@@ -24,7 +26,7 @@ class Event extends Component {
         <h3 className="event-name">{ name }</h3>
         <p className="event-group">{ groupName }</p>
         <p className="event-rsvp">{ rsvp }</p>
-        <button className="show-details" onClick={this.handleClick}>Details</button>
+        <button className="details-btn" onClick={this.handleClick}>Details</button>
         <div className={`modal ${!this.state.moreInfo ? 'display-hidden' : ''}`}>
         </div>
       </div>

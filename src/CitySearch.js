@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { getSuggestions } from './api.js'
 
 class CitySearch extends Component {
 
   state = {
-    query: 'Munich',
+    query: '',
     suggestions: []
   }
 
@@ -12,21 +13,21 @@ class CitySearch extends Component {
     this.setState({
       query: value
     })
+    getSuggestions(value).then(suggestions => this.setState({suggestions}));
   }
 
-  handleSuggestionClick = (value) => {
-    this.setState({
-      query: value
-    })
+  handleSuggestionClick = (value, lat, lon) => {
+    this.setState({query: value});
+    this.props.updateEvents(lat, lon);
   }
 
   render(){
     return(
       <div className="city-search">
-        <input type="text" className="city" value={this.state.query} onChange={this.handleInputChange}/>
+        <input type="text" className="city" value={this.state.query} placeholder="City" onChange={this.handleInputChange}/>
         <ul className="suggestions">
           {this.state.suggestions.map(suggestion => 
-            <li key={suggestion.name_string} onClick={() => this.handleSuggestionClick(suggestion.name_string)}>{suggestion.name_string}</li>
+            <li key={suggestion.name_string} onClick={() => this.handleSuggestionClick(suggestion.name_string, 1.1, 1.2)}>{suggestion.name_string}</li>
           )}
         </ul>
       </div>
