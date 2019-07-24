@@ -19,6 +19,7 @@ class CitySearch extends Component {
   handleSuggestionClick = (value, lat, lon) => {
     this.setState({query: value});
     this.props.updateEvents(lat, lon);
+    this.setState({suggestions: []});
   }
 
   render(){
