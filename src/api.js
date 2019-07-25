@@ -57,7 +57,7 @@ async function getEvents(lat, lon) {
   }
 }
 
-async function getAccessToken() {
+function getAccessToken() {
   const accessToken = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
   const lastSavedTime = localStorage.getItem('last_saved_time');
