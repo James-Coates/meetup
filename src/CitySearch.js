@@ -28,7 +28,7 @@ class CitySearch extends Component {
         <input type="text" className="city" value={this.state.query} placeholder="City" onChange={this.handleInputChange}/>
         <ul className="suggestions">
           {this.state.suggestions.map(suggestion => 
-            <li key={suggestion.name_string} onClick={() => this.handleSuggestionClick(suggestion.name_string, 1.1, 1.2)}>{suggestion.name_string}</li>
+            <li key={suggestion.name_string} onClick={() => this.handleSuggestionClick(suggestion.name_string, suggestion.lat, suggestion.lon)}>{suggestion.name_string}</li>
           )}
         </ul>
       </div>
