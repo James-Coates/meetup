@@ -58,9 +58,9 @@ async function getEvents(lat, lon) {
 }
 
 function getAccessToken() {
-  const accessToken = localStorage.getItem('access_token');
-  const refreshToken = localStorage.getItem('refresh_token');
-  const lastSavedTime = localStorage.getItem('last_saved_time');
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const lastSavedTime = localStorage.getItem('lastSavedTime');
 
   if(!accessToken) {
     const searchParams = new URLSearchParams(window.location.search);
@@ -77,7 +77,7 @@ function getAccessToken() {
     return accessToken;
   }
 
-  // If the access_token is expired, try and renew using the renew token
+  // If the accessToken is expired, try and renew using the renew token
   return getOrRenewAccessToken('renew', refreshToken);
 }
 
@@ -88,14 +88,14 @@ async function getOrRenewAccessToken(type, key) {
   } else if (type === 'renew') {
     url ='https://m49ckcqvs2.execute-api.eu-west-2.amazonaws.com/dev/api/refresh/' + key;
   }
-
+  
   const tokenInfo = await axios.get(url);
+  console.log(tokenInfo);
+  localStorage.setItem('accessToken', tokenInfo.data.accessToken);
+  localStorage.setItem('refreshToken', tokenInfo.data.refreshToken);
+  localStorage.setItem('lastSavedTime', Date.now());
 
-  localStorage.setItem('access_token', tokenInfo.data.access_token);
-  localStorage.setItem('refresh_token', tokenInfo.data.refresh_token);
-  localStorage.setItem('last_saved_time', tokenInfo.data.last_saved_time);
-
-  return tokenInfo.data.access_token;
+  return tokenInfo.data.accessToken;
 }
 
 export { getSuggestions, getEvents };
