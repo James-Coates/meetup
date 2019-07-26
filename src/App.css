@@ -48,7 +48,7 @@ p {
   color: #fff;
 }
 
-.container {
+.main-container {
   position: relative;
   min-height: calc(100vh - 250px);
   padding: 100px 0;
@@ -144,6 +144,32 @@ input[type="number"] {
 
 .event-rsvp::after {
   content: ' people are attending'
+}
+
+/* .event-details__header {
+
+} */
+
+.modal-90w {
+  width: 80%;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 1140px;
+  }
+}
+
+.event-details__date {
+  display: block;
+}
+
+.event-details__name {
+  display: block;
+}
+
+.event-details__img {
+  width: 100%;
 }
 
 .description {

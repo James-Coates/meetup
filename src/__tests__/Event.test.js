@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
+import { Modal } from 'react-bootstrap';
 
 describe('<Event /> Component', () => {
 
@@ -60,20 +61,5 @@ describe('<Event /> Component', () => {
   test('render show event details button', () => {
     expect(EventWrapper.find('.details-btn')).toHaveLength(1);
   });
-
-  test('check event modal hidden by default', () => {
-    expect(EventWrapper.find('.modal').hasClass('display-hidden')).toBe(true);
-  })
-
-  test('check moreInfo default state', () => {
-    const moreInfo = EventWrapper.state('moreInfo');
-    expect(moreInfo).toBe(false);
-  })
-
-  test('change state when details is clicked', () => {
-    EventWrapper.find('.details-btn').simulate('click');
-    const moreInfo = EventWrapper.state('moreInfo');
-    expect(moreInfo).toBe(true);
-  })
 
 })

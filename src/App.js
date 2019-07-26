@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Container>
+        <Container className="main-container">
           <CitySearch updateEvents={this.updateEvents}/>
           <EventList events={this.state.events} />
           <NumberOfEvents />
