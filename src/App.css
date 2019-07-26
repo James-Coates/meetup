@@ -1,6 +1,15 @@
+:root {
+  --color-main: #9ee8ff;
+  --color-dark: #181818;
+  --color-light: #f0f0f0;
+}
+
+body {
+  color: var(--color-dark);
+}
+
 .App {
   text-align: center;
-  padding: 2% 5%;
 }
 
 .App * {
@@ -12,8 +21,37 @@ ul {
   list-style: none;
 }
 
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 120px;
+  font-weight: 400;
+}
+
 p {
   margin: 5px 0;
+}
+
+.header {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-main);
+  position: relative;
+  flex-direction: column;
+  color: #fff;
+  font-size: 18px;
+}
+
+.logo {
+  color: #fff;
+}
+
+.container {
+  position: relative;
+  min-height: calc(100vh - 250px);
+  padding: 100px 0;
 }
 
 input[type="text"], input[type="number"] {
@@ -25,6 +63,12 @@ input[type="text"], input[type="number"] {
   line-height: 20px;
   align-self: center;
   height: 38px;
+  width: 500px;
+}
+
+input[type="number"] {
+  width: 100%;
+  text-align: center;
 }
 
 .city {
@@ -34,10 +78,15 @@ input[type="text"], input[type="number"] {
 .city-search {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .suggestions {
-  width: 250px;
+  width: 500px;
   align-self: center;
   margin: 0;
   font-size: 14px;
@@ -47,7 +96,7 @@ input[type="text"], input[type="number"] {
   text-align: left;
   padding: 8px 6px 8px 10px;
   background-color: #eee;
-  cursor: default;
+  cursor: pointer;
 }
 
 .suggestions > li:last-child {
@@ -57,7 +106,7 @@ input[type="text"], input[type="number"] {
 
 
 .suggestions > li:hover {
-  background-color: #BCDCDB;
+  background-color: var(--color-main);
 }
 
 .event {
@@ -102,7 +151,16 @@ input[type="text"], input[type="number"] {
 }
 
 .number-of-events {
-  width: 80px;
-  margin: 20px 0 50px;
+  width: 60px;
   text-align: right;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Custom CSS */
+
+.display-hidden {
+  display: none;
 }

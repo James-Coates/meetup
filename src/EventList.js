@@ -12,7 +12,7 @@ class EventList extends Component {
     const { events } = this.props;
 
     return (
-      <ul className="event-list">
+      <ul className={!events.length ? 'display-hidden' : 'event-list'}>
         {events.map(event => 
           <li key={event.id}>
             <Event event={event} />

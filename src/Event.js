@@ -8,7 +8,8 @@ class Event extends Component {
   }
 
   handleClick = () => {
-    this.setState({moreInfo: true})
+    const switcher = !this.state.moreInfo
+    this.setState({moreInfo: switcher});
   }
 
   render() {
@@ -28,6 +29,9 @@ class Event extends Component {
         <p className="event-rsvp">{ rsvp }</p>
         <button className="details-btn" onClick={this.handleClick}>Details</button>
         <div className={`modal ${!this.state.moreInfo ? 'display-hidden' : ''}`}>
+          <p className="event-details-date">{ date }</p>
+          <h3 className="event-details-name">{ name }</h3>
+          <img src='https://placehold.it/400x400' alt=''/>
         </div>
       </div>
     )

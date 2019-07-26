@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import EventList from './EventList'
 import CitySearch from './CitySearch'
 import NumberOfEvents from './NumberOfEvents';
+import Header from './Header';
 import { getEvents } from './api';
+import { Container } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
@@ -18,10 +20,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Meetup Test 6</h1>
-        <CitySearch updateEvents={this.updateEvents}/>
-        <EventList events={this.state.events}/>
-        <NumberOfEvents />
+        <Header />
+        <Container>
+          <CitySearch updateEvents={this.updateEvents}/>
+          <EventList events={this.state.events} />
+          <NumberOfEvents />
+        </Container>
       </div>
     );
   } 

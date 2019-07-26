@@ -5,6 +5,7 @@ import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import Event from '../Event';
 import NumberOfEvents from '../NumberOfEvents';
+import Header from '../Header';
 import { mockEvents } from '../mock-events';
 
 describe('<App /> component', () => {
@@ -14,17 +15,25 @@ describe('<App /> component', () => {
     AppWrapper = shallow(<App />);
   })
 
+  test('render header component', () => {
+    expect(AppWrapper.find(Header)).toHaveLength(1);
+  })
+
   test('render list of events', () => {
     expect(AppWrapper.find(EventList)).toHaveLength(1);
-  })
+  });
+
+  test('render list of events', () => {
+    expect(AppWrapper.find(EventList)).toHaveLength(1);
+  });
 
   test('render CitySearch', () => {
     expect(AppWrapper.find(CitySearch)).toHaveLength(1);
-  })
+  });
 
   test('render number of events', () => {
     expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
-  })
+  });
 
 });
 
