@@ -26,7 +26,6 @@ class Event extends Component {
     const groupName = event && event.group ? event.group.name : '';
     const rsvp = event.yes_rsvp_count;
     const description = event.description;
-    const test = '<p>test</p> <p>test2<p/>'
 
     return(
       <div className="event">
