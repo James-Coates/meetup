@@ -8,13 +8,29 @@ import { Container } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
+  _isMounted = false;
 
   state = {
-    events: []
+    events: [],
+    city: {}
   }
 
-  updateEvents = (lat, lon) => {
-    getEvents(lat, lon).then(events => this.setState({events}));
+  componentDidMount() {
+    this._isMounted = true;
+    this.updateEvents(undefined, undefined, 32);
+  }
+
+  updateEvents = (lat, lon, page) => {
+    getEvents(lat, lon, page).then(data => {
+      if (this._isMounted) {
+        const {city, events} = data;
+        this.setState({city, events});
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   
   render() {
@@ -24,7 +40,7 @@ class App extends Component {
         <Container className="main-container">
           <CitySearch updateEvents={this.updateEvents}/>
           <EventList events={this.state.events} />
-          <NumberOfEvents />
+          <NumberOfEvents updateEvents={this.updateEvents}/>
         </Container>
       </div>
     );

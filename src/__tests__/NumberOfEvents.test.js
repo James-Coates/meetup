@@ -7,7 +7,7 @@ describe('<NumberOfEvents /> Component', () => {
   let NumberOfEventsWrapper;
 
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}} />);
   })
 
   test('render number of events input with default of 32', () => {
