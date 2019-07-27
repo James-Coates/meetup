@@ -7,6 +7,7 @@ import Event from '../Event';
 import NumberOfEvents from '../NumberOfEvents';
 import Header from '../Header';
 import { mockEvents } from '../mock-events';
+import { async } from 'q';
 
 describe('<App /> component', () => {
 
@@ -18,10 +19,6 @@ describe('<App /> component', () => {
   test('render header component', () => {
     expect(AppWrapper.find(Header)).toHaveLength(1);
   })
-
-  test('render list of events', () => {
-    expect(AppWrapper.find(EventList)).toHaveLength(1);
-  });
 
   test('render list of events', () => {
     expect(AppWrapper.find(EventList)).toHaveLength(1);
@@ -54,12 +51,31 @@ describe('<App /> integration', () => {
     AppWrapper.instance().updateEvents(1.1, 1.2);
     await AppWrapper.update();
     expect(AppWrapper.state('events')).toEqual(mockEvents.events);
-    AppWrapper.unmount();
-  })
+  });
 
   test('render correct list of events', () => {
     const AppWrapper = mount(<App />);
     AppWrapper.setState({events: [{id: 1}, {id: 2}, {id: 3}]});
     expect(AppWrapper.find(Event)).toHaveLength(3);
-  })
+    AppWrapper.unmount();
+  });
+
+  test('recieve correct number of events parameter on user change', async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    NumberOfEventsWrapper.instance().handleChange({target: {value: 5}});
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(undefined, undefined, 5);
+    AppWrapper.unmount();
+  });
+
+  test('change state when user changes number of events', async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateEvents(1.1, 1.2, 5);
+    await AppWrapper.update();
+    expect(AppWrapper.state('events')).toEqual(mockEvents.events.slice(0, 5));
+    AppWrapper.unmount();
+  });
 })
