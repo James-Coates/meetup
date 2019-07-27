@@ -64,6 +64,7 @@ input[type="text"], input[type="number"] {
   align-self: center;
   height: 38px;
   width: 500px;
+  max-width: 100%;
 }
 
 input[type="number"] {
@@ -83,6 +84,7 @@ input[type="number"] {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  max-width: 90%;
 }
 
 .suggestions {
@@ -90,6 +92,7 @@ input[type="number"] {
   align-self: center;
   margin: 0;
   font-size: 14px;
+  max-width: 100%;
 }
 
 .suggestions > li {
