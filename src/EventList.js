@@ -3,10 +3,6 @@ import Event from './Event';
 
 class EventList extends Component {
 
-  state = {
-    events: []
-  }
-
   render() {
 
     const { events } = this.props;
