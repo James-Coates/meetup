@@ -28,7 +28,7 @@ class Event extends Component {
     const description = event.description;
 
     return(
-      <div className="event">
+      <div className={this.state.show ? 'event modal-on' : 'event'}>
         <p className="event-date">{ date }</p>
         <h3 className="event-name">{ name }</h3>
         <p className="event-group">{ groupName }</p>
