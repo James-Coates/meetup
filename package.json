@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://james-coates.co.uk/meetup/",
   "dependencies": {
+    "atatus-js": "^3.1.1",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "enzyme": "^3.10.0",
