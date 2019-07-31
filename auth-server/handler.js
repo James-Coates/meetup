@@ -23,7 +23,7 @@ module.exports.getAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': 'https://james-coates.co.uk'
     },
     body: JSON.stringify({
       accessToken: info.data.access_token,
@@ -45,7 +45,7 @@ module.exports.refreshAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': 'http://127.0.0.1:5500'
+      'Access-Control-Allow-Origin': 'https://james-coates.co.uk'
     },
     body: JSON.stringify({
       accessToken: info.data.access_token,
