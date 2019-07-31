@@ -74,6 +74,4 @@ describe('Filter Events by City', () => {
     console.log(city);
     expect(city).toEqual('Munich, Germany');
   });
-
-
 });
