@@ -10,6 +10,25 @@ class CitySearch extends Component {
     infoText: ''
   }
 
+  componentWillMount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClickOutside = () => {
+    this.setState({suggestions: []});
+  }
+
+  handleClick = (event) => {
+    if(this.node.contains(event.target)) {
+      return;
+    };
+    this.handleClickOutside();
+  }
+
   handleInputChange = (event) => {
     const value = event.target.value;
     console.log(value);
@@ -47,7 +66,7 @@ class CitySearch extends Component {
           onChange={this.handleInputChange}
           onKeyUp={this.handleKeyUp}
         />
-        <ul className="suggestions">
+        <ul className="suggestions" ref={node => this.node =node}>
           {this.state.suggestions.map(suggestion => 
             <li key={suggestion.name_string} onClick={() => this.handleSuggestionClick(suggestion.name_string, suggestion.lat, suggestion.lon)}>{suggestion.name_string}</li>
           )}
