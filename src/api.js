@@ -1,29 +1,32 @@
 import { mockEvents } from './mock-events';
 import axios from 'axios';
 
+const mockSuggestions = [
+  {
+    city: 'Munich',
+    country: 'de',
+    localized_country_name: 'Germany',
+    name_string: 'Munich, Germany',
+    zip: 'meetup3',
+    lat: 48.14,
+    lon: 11.58
+  },
+  {
+    city: 'Munich',
+    country: 'us',
+    localized_country_name: 'USA',
+    state: 'ND',
+    name_string: 'Munich, North Dakota, USA',
+    zip: '58352',
+    lat: 48.66,
+    lon: -98.85
+  }
+];
+
+
 async function getSuggestions(query) {
   if (window.location.href.startsWith('http://localhost')) {
-    return [
-      {
-        city: 'Munich',
-        country: 'de',
-        localized_country_name: 'Germany',
-        name_string: 'Munich, Germany',
-        zip: 'meetup3',
-        lat: 48.14,
-        lon: 11.58
-      },
-      {
-        city: 'Munich',
-        country: 'us',
-        localized_country_name: 'USA',
-        state: 'ND',
-        name_string: 'Munich, North Dakota, USA',
-        zip: '58352',
-        lat: 48.66,
-        lon: -98.85
-      }
-    ];
+    return !query ? [] : (mockSuggestions.filter(item => item.city.toLowerCase().includes(query.toLowerCase())));
   }
 
   const token = await getAccessToken();
@@ -41,7 +44,7 @@ async function getEvents(lat, lon, page) {
   // return mockEvents.events;
   if (window.location.href.startsWith('http://localhost')) {
     const city = mockEvents.city;
-    const events = mockEvents.events.slice(0, page);
+    const events = page > 0 ? mockEvents.events.slice(0, page) : [];
     return {city, events};
   }
 
