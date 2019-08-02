@@ -12,21 +12,22 @@ class CitySearch extends Component {
 
   handleInputChange = (event) => {
     const value = event.target.value;
+    console.log(value);
     this.setState({ query: value })
-    getSuggestions(value).then(suggestions => this.setState({suggestions}));
-  }
-
-  handleKeyUp = (event) => {
-    console.log(event.target.value);
-    if (this.state.query && !this.state.suggestions.length) {
-      this.setState({
-        infoText: 'We can not find the city you are looking for. Please try another city',
-      });
-    } else {
-      this.setState({
-        infoText: ''
-      });
-    }
+    getSuggestions(value)
+      .then(suggestions => this.setState({suggestions}))
+      .then(() => {
+        if (this.state.query.length > 1 && !this.state.suggestions.length) {
+          this.setState({
+            infoText: 'We can not find the city you are looking for. Please try another city',
+          });
+        } else {
+          this.setState({
+            infoText: ''
+          });
+        }
+      }
+      );
   }
 
   handleSuggestionClick = (value, lat, lon) => {
@@ -35,7 +36,7 @@ class CitySearch extends Component {
     this.setState({suggestions: []});
   }
 
-  render(){
+  render() {
     return(
       <div className="city-search">
         <input 
