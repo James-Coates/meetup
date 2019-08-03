@@ -6,7 +6,7 @@ const axios = require('axios');
 // Meetup OAUTH details
 const consumerKey = 'n9bvuhvmod0qgbtuog9kadtfcj';
 const consumerSecret = '2m408k4cfjcn8e7r3vucrfog82';
-const redirectURI = 'https://james-coates.co.uk/meetup/';
+const redirectURI = 'https://jamescoates.me/meetup/';
 
 module.exports.getAccessToken = async (event) => {
 
@@ -23,7 +23,7 @@ module.exports.getAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': 'https://james-coates.co.uk'
+      'Access-Control-Allow-Origin': 'https://jamescoates.me'
     },
     body: JSON.stringify({
       accessToken: info.data.access_token,
@@ -45,7 +45,7 @@ module.exports.refreshAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': 'https://james-coates.co.uk'
+      'Access-Control-Allow-Origin': 'https://jamescoates.me'
     },
     body: JSON.stringify({
       accessToken: info.data.access_token,
