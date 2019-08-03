@@ -48,6 +48,11 @@ async function getEvents(lat, lon, page) {
     return {city, events};
   }
 
+  if (!navigator.onLine) {
+    const data = localStorage.getItem('lastData');
+    return JSON.parse(data);
+  }
+
   const token = await getAccessToken();
 
   if (token) {
@@ -61,7 +66,14 @@ async function getEvents(lat, lon, page) {
       url += '&page=' + page;
     }
     const result = await axios.get(url);
-    return result.data;
+    // return result.data;
+    const data = result.data;
+    
+    if(data.events.length) {
+      localStorage.setItem('lastData', JSON.stringify(data));
+    }
+
+    return data;
   }
 }
 
@@ -75,7 +87,7 @@ function getAccessToken() {
     const code = searchParams.get('code');
 
     if(!code) {
-      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=n9bvuhvmod0qgbtuog9kadtfcj&response_type=code&redirect_uri=https://james-coates.co.uk/meetup/';
+      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=n9bvuhvmod0qgbtuog9kadtfcj&response_type=code&redirect_uri=https://jamescoates.me/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
