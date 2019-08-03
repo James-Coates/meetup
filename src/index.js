@@ -7,5 +7,5 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-serviceWorker.unregister();
+serviceWorker.register();
 atatus.config('5669942bf71a4ffea15ac4a5c6579835').install();
