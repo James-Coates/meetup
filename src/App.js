@@ -3,6 +3,7 @@ import EventList from './EventList'
 import CitySearch from './CitySearch'
 import NumberOfEvents from './NumberOfEvents';
 import Header from './Header';
+import { infoAlert, InfoAlert } from './Alert';
 import { getEvents } from './api';
 import { Container } from 'react-bootstrap';
 import './App.css';
@@ -12,11 +13,17 @@ class App extends Component {
 
   state = {
     events: [],
-    city: {}
+    city: {},
+    alert: ''
   }
 
   componentDidMount() {
     this._isMounted = true;
+    if (!navigator.onLine) {
+      this.setState({alert: 'Note: The app is offline, information shown may not be up to date'});
+    } else {
+      this.setState({alert: ''});
+    };
     this.updateEvents(undefined, undefined, 32);
   }
 
@@ -39,6 +46,7 @@ class App extends Component {
         <Header />
         <Container className="main-container">
           <CitySearch updateEvents={this.updateEvents}/>
+          { this.state.alert ? <InfoAlert text={this.state.alert} /> : '' }
           <EventList events={this.state.events} />
           <NumberOfEvents updateEvents={this.updateEvents}/>
         </Container>
