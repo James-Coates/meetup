@@ -87,7 +87,7 @@ function getAccessToken() {
     const code = searchParams.get('code');
 
     if(!code) {
-      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=n9bvuhvmod0qgbtuog9kadtfcj&response_type=code&redirect_uri=https://jamescoates.me/meetup/';
+      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=n9bvuhvmod0qgbtuog9kadtfcj&response_type=code&redirect_uri=https://james-coates.github.io/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
