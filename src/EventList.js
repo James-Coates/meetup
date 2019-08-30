@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Event from './Event';
+import { Row, Col } from 'react-bootstrap';
 
 class EventList extends Component {
 
@@ -8,13 +9,13 @@ class EventList extends Component {
     const { events } = this.props;
 
     return (
-      <ul className={!events.length ? 'display-hidden' : 'event-list'}>
+      <Row className={!events.length ? 'display-hidden' : 'event-list'}>
         {events.map(event => 
-          <li key={event.id}>
+          <Col key={event.id} sm={12} md={6} className="event">
             <Event event={event} />
-          </li>
+          </Col>
         )}
-      </ul>
+      </Row>
     )
   }
 }

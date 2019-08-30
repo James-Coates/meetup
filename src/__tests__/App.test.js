@@ -7,7 +7,6 @@ import Event from '../Event';
 import NumberOfEvents from '../NumberOfEvents';
 import Header from '../Header';
 import { mockEvents } from '../mock-events';
-import { async } from 'q';
 
 describe('<App /> component', () => {
 

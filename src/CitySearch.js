@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getSuggestions } from './api.js';
 import { InfoAlert } from './Alert';
+import { Form } from 'react-bootstrap';
 
 class CitySearch extends Component {
 
@@ -58,9 +59,9 @@ class CitySearch extends Component {
   render() {
     return(
       <div className="city-search">
-        <input 
+        <Form.Control 
           type="text" 
-          className="city" 
+          className="search-bar__input" 
           value={this.state.query} 
           placeholder="City" 
           onChange={this.handleInputChange}

@@ -13,7 +13,7 @@ class Alert extends Component {
   }
 
   render() {
-    if(!this.props.text) return <div className="alert" />
+    if(!this.props.text) return <div className="my-alert" />
     return (
       <div className="alert">
         <p style={this.getStyle()}>{ this.props.text }</p>

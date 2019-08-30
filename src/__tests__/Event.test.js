@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
-import { Modal } from 'react-bootstrap';
 
 describe('<Event /> Component', () => {
 
@@ -38,28 +37,14 @@ describe('<Event /> Component', () => {
   });
 
   test('render event date', () => {
-    expect(EventWrapper.find('.event-date')).toHaveLength(1);
-    expect(EventWrapper.find('.event-date').text()).toBe(eventDetails.local_date);
+    expect(EventWrapper.find('.event-details__date')).toHaveLength(1);
+    expect(EventWrapper.find('.event-details__date').text()).toBe(eventDetails.local_date);
   });
 
   test('render event name', () => {
-    expect(EventWrapper.find('.event-name')).toHaveLength(1);
-    expect(EventWrapper.find('.event-name').text()).toBe(eventDetails.name);
+    expect(EventWrapper.find('.event-details__name')).toHaveLength(1);
+    expect(EventWrapper.find('.event-details__name').text()).toBe(eventDetails.name);
   });
 
-  test('render event group name', () => {
-    expect(EventWrapper.find('.event-group')).toHaveLength(1);
-    expect(EventWrapper.find('.event-group').text()).toBe(eventDetails.group.name);
-
-  });
-
-  test('render event rsvp count', () => {
-    expect(EventWrapper.find('.event-rsvp')).toHaveLength(1);
-    expect(EventWrapper.find('.event-rsvp').text()).toBe(String(eventDetails.yes_rsvp_count));
-  });
-
-  test('render show event details button', () => {
-    expect(EventWrapper.find('.details-btn')).toHaveLength(1);
-  });
 
 })

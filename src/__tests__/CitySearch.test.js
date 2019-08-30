@@ -11,7 +11,7 @@ describe('<CitySearch /> Component', () => {
   })
 
   test('render test input', () => {
-    expect(CitySearchWrapper.find('.city')).toHaveLength(1);
+    expect(CitySearchWrapper.find('.search-bar__input')).toHaveLength(1);
   })
 
   test('render list of suggestions', () => {
@@ -20,12 +20,12 @@ describe('<CitySearch /> Component', () => {
 
   test('render text input correctly', () => {
     const query = CitySearchWrapper.state('query'); // Set query element from CitySearch state 
-    expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
+    expect(CitySearchWrapper.find('.search-bar__input').prop('value')).toBe(query);
   })
 
   test('change state when text input changes', () => {
     const eventObject = { target: { value: 'Berlin' } };
-    CitySearchWrapper.find('.city').simulate('change', eventObject);
+    CitySearchWrapper.find('.search-bar__input').simulate('change', eventObject);
     expect(CitySearchWrapper.state('query')).toBe(eventObject.target.value);
   })
 
@@ -73,7 +73,7 @@ describe('<CitySearch /> Integration', () => {
   
   test('get a list of cities when user searches for Munich', async () => {
     const CitySearchWrapper = shallow(<CitySearch />);
-    CitySearchWrapper.find('.city').simulate('change', {target: {value: 'Munich'}});
+    CitySearchWrapper.find('.search-bar__input').simulate('change', {target: {value: 'Munich'}});
     await CitySearchWrapper.update();
     expect(CitySearchWrapper.state('suggestions')).toEqual([
       {

@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import React, { Component, useState } from 'react';
 import EventList from './EventList'
 import CitySearch from './CitySearch'
 import NumberOfEvents from './NumberOfEvents';
 import Header from './Header';
+import EventChart from './EventChart';
 import { InfoAlert } from './Alert';
 import { getEvents } from './api';
-import { Container } from 'react-bootstrap';
-import { ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import './App.css';
+import { Container, Row, Col, Button, Collapse } from 'react-bootstrap';
+
 
 class App extends Component {
   _isMounted = false;
@@ -16,7 +15,8 @@ class App extends Component {
   state = {
     events: [],
     city: {},
-    alert: ''
+    alert: '',
+    chartOpen: false
   };
 
   componentDidMount() {
@@ -38,26 +38,10 @@ class App extends Component {
     });
   };
 
-  getData = () => {
-    const next7Days = [];
-    const currentDate = moment();
-    // Loop 7 times for each day
-    for (let i = 0; i < 7; i++) {
-      currentDate.add(1, 'days');
-      const dateString = currentDate.format('YYYY-MM-DD');
-      const n = this.countEventsOnDate(dateString);
-      next7Days.push({date: dateString, number: n});
-    }
-    return next7Days;
-  };
-
-  countEventsOnDate = (date) => {
-    let n = 0; // Number of events
-    this.state.events.forEach((event) => {
-      if(event.local_date === date) n++;
-    });
-    return n;
-  };
+  toggleChart = () => {
+    console.log(this.state.chartOpen);
+    this.setState({ chartOpen: !this.state.chartOpen });
+  }
 
   componentWillUnmount() {
     this._isMounted = false;
@@ -67,21 +51,28 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Container className="main-container">
-          <h1>test2</h1>
-          <CitySearch updateEvents={this.updateEvents}/>
-          { this.state.alert ? <InfoAlert text={this.state.alert} /> : '' }
-          
-          <ResponsiveContainer height={400}>
-            <ScatterChart margin={{top: 20, right: 20, bottom: 20, left: 20}}>
-              <CartesianGrid />
-              <XAxis type="category" dataKey="date" />
-              <YAxis type="number" dataKey="number" allowDecimals={false} />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
-          </ResponsiveContainer>
-
+        <Container className="main" id="main">
+          <Row className="filter-container">
+            <Col xs={12} md={8} className="search-bar__box">
+              <CitySearch updateEvents={this.updateEvents}/>
+              { this.state.alert ? <InfoAlert text={this.state.alert} /> : '' }
+            </Col>
+            <Col className="toggleButton-box" xs={12} md={4}>
+              <Button 
+                className="btn-2"
+                onClick={this.toggleChart}
+                aria-controls="event-chart"
+                aria-expanded={this.state.chartOpen}
+              >
+                Events this week &rarr;
+              </Button>
+            </Col>
+          </Row>
+          <Collapse in={this.state.chartOpen}>
+            <div id="event-chart">
+              <EventChart events={this.state.events}/>
+            </div>
+          </Collapse>
           <EventList events={this.state.events} />
           <NumberOfEvents updateEvents={this.updateEvents}/>
         </Container>
